@@ -38,7 +38,7 @@ public class PromUaSmokeTest extends ElementsInitiation {
 
 
     @Test(priority = 0, dataProvider = "smokeSearchData")
-    public void testSmokeSearchVerification(String searchString) throws Exception {
+    public void testSmokeSearchVerification(String searchString) {
         initiation.printMessage("Testcase: open prom.ua, verify main elements, simple search, verify search results");
         mainPage.verifyDefaultMainPage();
         search.simpleSearch(searchString);

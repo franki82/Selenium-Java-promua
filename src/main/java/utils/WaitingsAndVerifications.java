@@ -36,13 +36,13 @@ public class WaitingsAndVerifications {
 
     public void waitForClickableElementState(WebDriver driver, Integer timeoutValue, WebElement element, String elementName) {
         Wait<WebDriver> wait = new WebDriverWait(driver, timeoutValue)
-                .withMessage(elementName + " is not clickable after wait: " + timeoutValue + " seconds ");;
+                .withMessage(elementName + " is not clickable after wait: " + timeoutValue + " seconds ");
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForInvisibility(WebDriver driver, Integer timeoutValue, WebElement element, String elementName) {
         try {
-            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeoutValue))
+            Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeoutValue))
                     .withMessage(elementName + " is still visible: " + timeoutValue + " seconds ");
             wait.until(ExpectedConditions.invisibilityOf(element));
         } catch (NoSuchElementException e){
@@ -51,7 +51,7 @@ public class WaitingsAndVerifications {
     }
 
     public void WaitForLoad(int seconds, String partUrl, WebDriver driver) {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(seconds))
+        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(seconds))
                 .ignoring(TimeoutException.class);
         wait.until(ExpectedConditions.urlContains(partUrl));
     }
@@ -65,17 +65,17 @@ public class WaitingsAndVerifications {
     }
 
 
-    public void verifyStrings(String actual, String expected) throws Exception {
+    public void verifyStrings(String actual, String expected) {
         Assert.assertEquals(actual.replaceAll("\\s+", ""), expected.replaceAll("\\s+", ""),
                 "Failed verification: actual string '" + actual + "' not equal to expected string '" + expected
                         + "'. \n Details: ");
     }
 
-    public void verifyTrue(boolean condition, String myValidationMessage) throws Exception {
-        Assert.assertTrue(condition, "Failed boolen (TRUE) verification. Details: " + myValidationMessage + ". Technical details:");
+    public void verifyTrue(boolean condition, String myValidationMessage) {
+        Assert.assertTrue(condition, "Failed boolean (TRUE) verification. Details: " + myValidationMessage + ". Technical details:");
     }
 
-    public void verifyNotEqualStrings(String actual, String expected) throws Exception {
+    public void verifyNotEqualStrings(String actual, String expected) {
         Assert.assertNotEquals(actual.replaceAll("\\s+", ""), expected.replaceAll("\\s+", ""),
                 "Failed verification: actual string '" + actual + "' equal to expected string '" + expected
                         + "'. \n Details: ");
@@ -92,9 +92,7 @@ public class WaitingsAndVerifications {
 
     public boolean verifyIsElementPresent(List<WebElement> elementToVerify){
         try{
-            if (elementToVerify.size()>0) {
-                return true;
-            } else return false;
+            return !elementToVerify.isEmpty();
         } catch (Throwable e){
             return false;
         }

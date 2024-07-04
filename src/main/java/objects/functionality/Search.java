@@ -49,6 +49,7 @@ public class Search extends WaitingsAndVerifications {
     private List<WebElement> popularProductExamplesItems;
 
     public void simpleSearch(String searchValue){
+        //set conflict comment
         waitForVisibilityElement(driver, longTimeout, searchInput, "Search Input");
         waitForVisibilityElement(driver, longTimeout, startSearchButtonNotActive, "Start Search Button (Not Active)");
         searchInput.sendKeys(searchValue);

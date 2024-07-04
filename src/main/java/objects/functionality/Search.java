@@ -56,6 +56,7 @@ public class Search extends WaitingsAndVerifications {
         waitForVisibilityElement(driver, longTimeout, clearSearchButton, "Clear Search Button");
         waitForVisibilityElement(driver, longTimeout, startSearchButtonActive, "Start Search Button (Active)");
         startSearchButtonActive.click();
+        //second comment
     }
 
 }
